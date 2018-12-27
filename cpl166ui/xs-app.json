@@ -1,0 +1,21 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"routes": [
+		{
+			"source": "^/euro.xsodata/.*$", 
+			"destination": "cpl166js_be",
+			"scope": "$XSAPPNAME.view"
+		},
+		{
+			"source": ".*\\.xsjs",
+			"destination": "cpl166js_be",
+			"scope": "$XSAPPNAME.create"
+		},
+		{
+			"source": "^/(.*)$",
+			"localDir": "resources",
+			"scope": "$XSAPPNAME.view"
+		}
+		]
+}
