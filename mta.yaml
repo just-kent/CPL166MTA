@@ -7,6 +7,39 @@ modules:
     path: cpl166db
     requires:
       - name: hdi_cpl166db
+        properties:
+          TARGET_CONTAINER: ~{hdi-container-name}
+
+  
+      - name: cross-container-service-1
+        group: SERVICE_REPLACEMENTS
+
+        properties:
+          key: ServiceName_1
+          service: ~{the-service-name}
+                            
+
+
+  
+      - name: cross-container-service-2
+        group: SERVICE_REPLACEMENTS
+
+        properties:
+          key: ServiceName_2
+          service: ~{the-service-name}
+                            
+
+
+  
+      - name: cross-container-service-3
+        group: SERVICE_REPLACEMENTS
+
+        properties:
+          key: ServiceName_3
+          service: ~{the-service-name}
+                            
+
+
   - name: cpl166js
     type: nodejs
     path: cpl166js
@@ -29,6 +62,15 @@ modules:
           url: '~{url}'
           forwardAuthToken: true
       - name: cpl166_uaa
+
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+     - name: js_api
+       properties:
+          url: ${default-url}
+
 resources:
   - name: hdi_cpl166db
     properties:
@@ -38,3 +80,27 @@ resources:
     type: com.sap.xs.uaa
     parameters:
       path: ./xs-security.json
+
+  - name: cross-container-service-1
+    parameters:
+       service-name: XSA_DEV-djq20nzpvnqzvp47-CPL166MTA-hdi_cpl166db
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+
+
+  - name: cross-container-service-2
+    parameters:
+       service-name: XSA_DataLoader-table-grantor
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+
+
+  - name: cross-container-service-3
+    parameters:
+       service-name: XSA_DataLoader-table-grantor
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+
